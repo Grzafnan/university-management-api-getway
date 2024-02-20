@@ -22,22 +22,49 @@ const getAllFromDB = async (req: Request): Promise<IGenericResponse> => {
   });
 
   return response;
-}
+};
 
 const getByIdFromDB = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
   const response: IGenericResponse = await HttpService.get(
-    `/academic-semesters/${req.params.id}`, {
+    `/academic-semesters/${id}`, {
     headers: {
       Authorization: req.headers.authorization,
     }
   });
 
   return response;
-}
+};
+
+const updateByIdFromDB = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.patch(
+    `/academic-semesters/${id}`, req.body, {
+    headers: {
+      Authorization: req.headers.authorization,
+    }
+  });
+
+  return response;
+};
+
+const deleteByIdFromDB = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.delete(
+    `/academic-semesters/${id}`, {
+    headers: {
+      Authorization: req.headers.authorization,
+    }
+  });
+
+  return response;
+};
 
 
 export const AcademicSemesterService = {
   insertInToDB,
+  getByIdFromDB,
+  updateByIdFromDB,
+  deleteByIdFromDB,
   getAllFromDB,
-  getByIdFromDB
 };
