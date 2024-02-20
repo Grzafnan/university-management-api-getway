@@ -20,8 +20,19 @@ const getAllFromDB = async (req: Request, res: Response, next: NextFunction) => 
   }
 };
 
+const getByIdFromDB = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    console.log(req.params.id);
+    const result = await AcademicSemesterService.getByIdFromDB(req);
+    sendResponse(res, result)
+  } catch (error) {
+    next(error)
+  }
+};
+
 
 export const AcademicSemesterController = {
   insertIntoDB,
   getAllFromDB,
+  getByIdFromDB,
 }
