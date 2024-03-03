@@ -48,6 +48,7 @@ const deleteByIdFromDB = async (req: Request): Promise<IGenericResponse> => {
 
 const getAllFromDB = async (req: Request): Promise<IGenericResponse> => {
   const response: IGenericResponse = await HttpService.get('/buildings', {
+    params: req.query,
     headers: {
       Authorization: req.headers.authorization,
     }
